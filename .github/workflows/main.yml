@@ -27,7 +27,7 @@ jobs:
             
         run: |
           echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} << 'EOF'
           
             #Now we have got the access of EC2 and we will start the deploy .
             cd /home/ubuntu/bhtestt &&
@@ -35,9 +35,8 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            $(echo
-              #Auth-JWT
-              SECRETE_KEY = THISisMYSecretwherewithoutanytension
+            cat > .env.qa << 'ENV_EOF'
+              SECRETE_KEY = THISisMYSecnywherewithoutanytension
               
               #Core
               APP_URL = https://qa.yesspark.io
@@ -47,19 +46,19 @@ jobs:
               
               #AWS SES
               EMAIL_SERVER=AmazonSesSmtp
-              SMTP_AMZN_USER=AKIAWL3SWV
-              SMTP_AMZN_PASS=BFaWyL2MAoVyxcrOB211DiVFRRmq3x
+              SMTP_AMZN_USER=AK
+              SMTP_AMZN_PASS=BFaWyL2MAoVybH211DiVFRRmq3x
               VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
               
               #AWS S3
-              AWS_ACCESS_KEY_ID="AKIAQ3TRQQ"
-              AWS_ACCESS_KEY_SECRET="v8TSSO8hw86+tWRqJEc"
+              AWS_ACCESS_KEY_ID="AKIAJFLDTQ"
+              AWS_ACCESS_KEY_SECRET="v8TSSO8hwyecj8Em6Ec"
               AWS_S3_BUCKET_NAME="thesparkone"
               AWS_S3_ACL="public-read"
               AWS_S3_PUBLIC_URL="https://thesparkone.s3.us-west-2.amazonaws.com"
               
               #RabbitMQ
-              RABBITMQ_URL="amqp://spand_user:cRoGtH!Vexees@ec2-34-208-165-241.us-west-2.compute.amaaws.com/sparkland_test"
+              RABBITMQ_URL="amqp://sparkland_user:c!VexePHobes@ec2-34-208-165-241.us-west-2.compute.amazonaws.com/sparkland_test"
               LOCAL_RABBITMQ_URL=amqp://admin:admin@localhost:5672
               
               ##### Not Use Anymore ######
@@ -67,15 +66,15 @@ jobs:
               CHARGEBEE_BASEURL = https://sparkland-test.chargebee.com/api/v2
               CHARGEBEE_BUSINESS_ENTITY_ID = __dev__8at09TEfAyAk2
               CHARGEBEE_SITE = "sparkland-test"
-              CHARGEBEE_API_KEY= "test_hWs9TRZiPWZk5dc8r6o"
+              CHARGEBEE_API_KEY= "test_hWs9TRZE5dc8r6o"
               
               ##### Not Use Anymore ######
               LOCAL_BASE_URL = http://localhost:4040/api/v2
-              SMTP_USER = AKIRP3SWV
-              SMTP_PASS = f2nqZC
+              SMTP_USER = AKIAWLLCISWV
+              SMTP_PASS = f2nYL5kqZC
               localhost ="localhost"
-              ROCKSET_APIKEY = XbdHggR6grFthuJs4SbJW3JpfXbqzAfpNdIldDs6b
-
-            ) > .env.qa &&
+              ROCKSET_APIKEY = XbdHggR6grFthCU25GRyDJW3JpfXbqzAfpNdIldDs6b
+            ENV_EOF
+          EOF
             echo "hello"
           '
