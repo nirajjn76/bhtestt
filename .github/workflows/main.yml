@@ -35,6 +35,6 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            sed -i 's/^DB_URL=.*/DB_URL=new_value/' .env.qa &&
+            sed -i 's/^DB_URL=.*/DB_URL=${{ secrets.DB_URL  }}/' .env.qa &&
             echo "hello"
           '
