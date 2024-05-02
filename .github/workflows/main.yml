@@ -1,0 +1,79 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+#First we will see the application build or not , then we will deploy in EC2
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2 
+      - name: Deploy in EC2
+        env:
+            PRIVATE_KEY: ${{ secrets.AWS_PK_QA  }}
+            HOSTNAME : ${{ secrets.AWS_QA  }}
+            USER_NAME : ${{ secrets.USER_NAME  }}
+            
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+          
+            #Now we have got the access of EC2 and we will start the deploy .
+            cd /home/ubuntu/bhtest &&
+            git checkout main &&
+            git fetch --all &&
+            git reset --hard origin/main &&
+            git pull origin main &&
+            cat <<'EOF' >.env.qa
+              SECRETE_KEY = THISisMYSecnywherewithoutanytension
+              
+              #Core
+              APP_URL = https://qa.yesspark.io
+              BASE_URL = https://qa.yesspark.io/api/v2
+              PORT = 4040
+              DB_URL=mongodb+srv://sparkland_test_rw:TCr8@cluster0.laxvo.mongodb.net/thesparkone?retryWrites=true&w=majority
+              
+              #AWS SES
+              EMAIL_SERVER=AmazonSesSmtp
+              SMTP_AMZN_USER=AK
+              SMTP_AMZN_PASS=BFaWyL2MAoV
+              VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
+              
+              #AWS S3
+              AWS_ACCESS_KEY_ID="AKIA"
+              AWS_ACCESS_KEY_SECRET="v8TSSO8h6Ec"
+              AWS_S3_BUCKET_NAME="thesparkone"
+              AWS_S3_ACL="public-read"
+              AWS_S3_PUBLIC_URL="https://theskone.s3.us-st-2.amaws.com"
+              
+              #RabbitMQ
+              RABBITMQ_URL="amqp://sparkland_user:c!Vexes@ec2-34-208-165-241.us-west-2.compute.amaz.com/sparkland_test"
+              LOCAL_RABBITMQ_URL=amqp://admin:admin@localhost:5672
+              
+              ##### Not Use Anymore ######
+              #ChargeBee
+              CHARGEBEE_BASEURL = https://sparkland-test.chae.com/api/v2
+              CHARGEBEE_BUSINESS_ENTITY_ID = __dev__8atAyAk2
+              CHARGEBEE_SITE = "sparkland-te"
+              CHARGEBEE_API_KEY= "test_hWRZE5dc8r6o"
+              
+              ##### Not Use Anymore ######
+              LOCAL_BASE_URL = http://localhost:4040/api/v2
+              SMTP_USER = AKIAWLL
+              SMTP_PASS = f2nqZC
+              localhost ="lalhost"
+              ROCKSET_APIKEY = XbdHgXbqzAfpNdIldDs6b
+          EOF
+            echo "hello"
+          '
