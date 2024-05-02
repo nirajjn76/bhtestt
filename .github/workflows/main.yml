@@ -35,7 +35,7 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            "cat <<'EOF' >.env.qa
+            cat <<EOF >.env.qa
               SECRETE_KEY = THISisMYSecnywherewithoutanytension
               
               #Core
@@ -74,6 +74,6 @@ jobs:
               SMTP_PASS = f2nqZC
               localhost ="lalhost"
               ROCKSET_APIKEY = XbdHgXbqzAfpNdIldDs
-          EOF"
+          EOF
             echo "hello"
           '
