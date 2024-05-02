@@ -48,7 +48,7 @@ jobs:
               EMAIL_SERVER=AmazonSesSmtp
               SMTP_AMZN_USER=AK
               SMTP_AMZN_PASS=BFaWyL2MAoVybH211DiVFRRmq3x
-              VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
+              VARIFIED_AWS_EMAIL = '"YesSpark" \<account-noreply@yesspark.io\>'
               
               #AWS S3
               AWS_ACCESS_KEY_ID="AKIAJFLDTQ"
