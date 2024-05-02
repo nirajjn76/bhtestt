@@ -35,6 +35,45 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            sed -i 's/DB_URL=*/DB_URL=mongodb+srv://sparkland_test_rw:TCr8@cluster0.laxvo.mongodb.net/thesparkone?retryWrites=true&w=majority/g .env.qa &&
+            cat <<'EOF' >.env.qa
+              SECRETE_KEY = THISisMYSecnywherewithoutanytension
+              
+              #Core
+              APP_URL = https://qa.yesspark.io
+              BASE_URL = https://qa.yesspark.io/api/v2
+              PORT = 4040
+              DB_URL=${{ secrets.DB_URL }}
+              
+              #AWS SES
+              EMAIL_SERVER=AmazonSesSmtp
+              SMTP_AMZN_USER=AK
+              SMTP_AMZN_PASS=BFaWyL2MAoVybH211DiVFRRmq3x
+              VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
+              
+              #AWS S3
+              AWS_ACCESS_KEY_ID="AKIAJFLDTQ"
+              AWS_ACCESS_KEY_SECRET="v8TSSO8hwyecj8Em6Ec"
+              AWS_S3_BUCKET_NAME="thesparkone"
+              AWS_S3_ACL="public-read"
+              AWS_S3_PUBLIC_URL="https://thesparkone.s3.us-west-2.amazonaws.com"
+              
+              #RabbitMQ
+              RABBITMQ_URL="amqp://sparkland_user:c!VexePHobes@ec2-34-208-165-241.us-west-2.compute.amazonaws.com/sparkland_test"
+              LOCAL_RABBITMQ_URL=amqp://admin:admin@localhost:5672
+              
+              ##### Not Use Anymore ######
+              #ChargeBee
+              CHARGEBEE_BASEURL = https://sparkland-test.chargebee.com/api/v2
+              CHARGEBEE_BUSINESS_ENTITY_ID = __dev__8at09TEfAyAk2
+              CHARGEBEE_SITE = "sparkland-test"
+              CHARGEBEE_API_KEY= "test_hWs9TRZE5dc8r6o"
+              
+              ##### Not Use Anymore ######
+              LOCAL_BASE_URL = http://localhost:4040/api/v2
+              SMTP_USER = AKIAWLLCISWV
+              SMTP_PASS = f2nYL5kqZC
+              localhost ="localhost"
+              ROCKSET_APIKEY = XbdHggR6grFthCU25GRyDJW3JpfXbqzAfpNdIldDs6b
+          EOF
             echo "hello"
           '
