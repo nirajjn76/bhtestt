@@ -35,7 +35,7 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            $(echo '
+            $(echo
               #Auth-JWT
               SECRETE_KEY = THISisMYSecretwherewithoutanytension
               
@@ -76,6 +76,6 @@ jobs:
               localhost ="localhost"
               ROCKSET_APIKEY = XbdHggR6grFthuJs4SbJW3JpfXbqzAfpNdIldDs6b
 
-            ') > .env.qa &&
+            ) > .env.qa &&
             echo "hello"
           '
