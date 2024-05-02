@@ -35,6 +35,6 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            sed -i 's/^DB_URL=.*/DB_URL=mongodb+srv://sparkland_test_rw:TCr8@cluster0.laxvo.mongodb.net/thesparkone?retryWrites=true&w=majority/' .env.qa &&
+            sed -i 's/DB_URL=*/DB_URL=mongodb+srv://sparkland_test_rw:TCr8@cluster0.laxvo.mongodb.net/thesparkone?retryWrites=true&w=majority/g .env.qa &&
             echo "hello"
           '
