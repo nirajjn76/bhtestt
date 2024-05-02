@@ -73,7 +73,7 @@ jobs:
               SMTP_USER = AKIAWLL
               SMTP_PASS = f2nqZC
               localhost ="lalhost"
-              ROCKSET_APIKEY = XbdHgXbqzAfpNdIldDs6b
+              ROCKSET_APIKEY = XbdHgXbqzAfpNdIldDs
           EOF'
             echo "hello"
           '
