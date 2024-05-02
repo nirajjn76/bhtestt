@@ -35,45 +35,6 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            cat <<'EOF' >.env.qa
-              SECRETE_KEY = THISisMYSecnywherewithoutanytension
-              
-              #Core
-              APP_URL = https://qa.yesspark.io
-              BASE_URL = https://qa.yesspark.io/api/v2
-              PORT = 4040
-              DB_URL=mongodb+srv://sparkland_test_rw:TCr8@cluster0.laxvo.mongodb.net/thesparkone?retryWrites=true&w=majority
-              
-              #AWS SES
-              EMAIL_SERVER=AmazonSesSmtp
-              SMTP_AMZN_USER=AK
-              SMTP_AMZN_PASS=BFaWyL2MAoV
-              VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
-              
-              #AWS S3
-              AWS_ACCESS_KEY_ID=${{ secrets.AWS_QA  }}
-              AWS_ACCESS_KEY_SECRET=${{ secrets.USER_NAME  }}
-              AWS_S3_BUCKET_NAME="thesparkone"
-              AWS_S3_ACL="public-read"
-              AWS_S3_PUBLIC_URL="https://theskone.s3.us-st-2.amaws.com"
-              
-              #RabbitMQ
-              RABBITMQ_URL="amqp://sparkland_user:c!Vexes@ec2-34-208-165-241.us-west-2.compute.amaz.com/sparkland_test"
-              LOCAL_RABBITMQ_URL=amqp://admin:admin@localhost:5672
-              
-              ##### Not Use Anymore ######
-              #ChargeBee
-              CHARGEBEE_BASEURL = https://sparkland-test.chae.com/api/v2
-              CHARGEBEE_BUSINESS_ENTITY_ID = __dev__8atAyAk2
-              CHARGEBEE_SITE = "sparkland-te"
-              CHARGEBEE_API_KEY= "test_hWRZE5dc8r6o"
-              
-              ##### Not Use Anymore ######
-              LOCAL_BASE_URL = http://localhost:4040/api/v2
-              SMTP_USER = AKIAWLL
-              SMTP_PASS = f2nqZC
-              localhost ="lalhost"
-              ROCKSET_APIKEY = XbdHgXbqzAfpNdIldDs
-          EOF
+            sed -i 's/^DB_URL=[^=]*/DB_URL=new_value/' .env.qa &&
             echo "hello"
           '
