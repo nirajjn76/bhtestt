@@ -77,4 +77,3 @@ jobs:
             ENV_EOF
           EOF
             echo "hello"
-          '
