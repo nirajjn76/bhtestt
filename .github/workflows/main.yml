@@ -35,7 +35,7 @@ jobs:
             git fetch --all &&
             git reset --hard origin/main &&
             git pull origin main &&
-            cat <<EOF >.env.qa
+            cat <<'EOF' >.env.qa
               SECRETE_KEY = THISisMYSecnywherewithoutanytension
               
               #Core
@@ -51,8 +51,8 @@ jobs:
               VARIFIED_AWS_EMAIL = '"YesSpark" <account-noreply@yesspark.io>'
               
               #AWS S3
-              AWS_ACCESS_KEY_ID="AKIA"
-              AWS_ACCESS_KEY_SECRET="v8TSSO8h6Ec"
+              AWS_ACCESS_KEY_ID=${{ secrets.AWS_QA  }}
+              AWS_ACCESS_KEY_SECRET=${{ secrets.USER_NAME  }}
               AWS_S3_BUCKET_NAME="thesparkone"
               AWS_S3_ACL="public-read"
               AWS_S3_PUBLIC_URL="https://theskone.s3.us-st-2.amaws.com"
