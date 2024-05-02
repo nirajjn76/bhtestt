@@ -74,6 +74,6 @@ jobs:
               SMTP_PASS = f2nYL5kqZC
               localhost ="localhost"
               ROCKSET_APIKEY = XbdHggR6grFthCU25GRyDJW3JpfXbqzAfpNdIldDs6b
-            ENV_EOF
+          ENV_EOF
           EOF
             echo "hello"
