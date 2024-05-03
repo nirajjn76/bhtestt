@@ -4,6 +4,7 @@ name: CI
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
 #First we will see the application build or not , then we will deploy in EC2
